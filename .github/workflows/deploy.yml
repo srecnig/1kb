@@ -2,7 +2,7 @@ name: deploy 1kb
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "*" ] #  "main"
 
 permissions:
   contents: read
@@ -23,3 +23,13 @@ jobs:
     - name: build
       run: |
         ./build.py
+    - name: configure aws credentials
+      uses: aws-actions/configure-aws-credentials@v4
+      with:
+        aws-region: ${{ secrets.AWS_REGION }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-distribution-id: ${{ secrets.AWS_DISTRIBUTION_ID }}
+        role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+        role-skip-session-tagging: true
+
