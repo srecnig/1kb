@@ -22,6 +22,7 @@ jobs:
         pip install -r requirements.txt
     - name: build
       run: |
+        mkdir build
         ./build.py
     - name: configure aws credentials
       uses: aws-actions/configure-aws-credentials@v4
