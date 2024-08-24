@@ -1,6 +1,6 @@
 ## 1kb
 
-just a small website.
+just a small website, so i can join the [1k club](https://1kb.club/)
 
 ### build
 
@@ -8,4 +8,4 @@ just a small website.
 1. `python -m venv venv`
 2. `source venv/bin/activate`
 3. `pip install -r requirements.txt`
-4. upon calling `build.py`, every `.html` file in `src` will be minified
+4. upon calling `build.py`, every `.html` file in `src` will be minified and put into `build`
