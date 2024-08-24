@@ -13,7 +13,10 @@ for filename in os.listdir(SRC_DIR):
         if not filename.endswith(".html"):
             continue
         minified = minify_html.minify(
-            f.read(), minify_js=True, remove_processing_instructions=True
+            f.read(),
+            minify_js=True,
+            minify_css=True,
+            remove_processing_instructions=True,
         )
     with open(os.path.join(BUILD_DIR, filename), "w") as f:
         f.write(minified)
