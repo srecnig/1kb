@@ -2,7 +2,7 @@ name: deploy 1kb
 
 on:
   push:
-    branches: [ "*" ] #  "main"
+    branches: [ "main" ]
 
 permissions:
   contents: read
