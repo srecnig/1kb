@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<link rel="icon" href="data:,">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>very·united</title>
+<canvas width="150" height="150"></canvas>
+<script>
+    function d() {
+        var canvas = document.querySelector("canvas");
+        if (canvas.getContext) {
+            var ctx = canvas.getContext("2d");
+            var now = new Date();
+
+            // Clear the canvas
+            ctx.clearRect(0, 0, 150, 150);
+
+            // Hours
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+
+            // Convert time to angles in radians
+            var hourAngle = ((hour % 12) / 12 * 360 + (minute / 60) * 30) * (Math.PI / 180) - Math.PI / 2;
+            var minuteAngle = (minute / 60) * 360 * (Math.PI / 180) - Math.PI / 2;
+            var secondAngle = (second / 60) * 360 * (Math.PI / 180) - Math.PI / 2;
+
+            for (var hand of [[40, hourAngle], [60, minuteAngle], [70, secondAngle]]) {
+                ctx.beginPath();
+                ctx.moveTo(75, 75);
+                ctx.lineTo(75 + hand[0] * Math.cos(hand[1]), 75 + hand[0] * Math.sin(hand[1]));
+                ctx.stroke();
+            }
+        }
+    }
+    setInterval(d, 9); // Update the watch every second
+</script>
