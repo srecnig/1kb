@@ -1,11 +1,8 @@
 <!DOCTYPE html>
 <link rel="icon" href="data:,">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>very·united</title>
 <canvas width="150"></canvas>
-<p style="font: 32px sans-serif;">hi! i'm martin.<br>
+<p style="font: 32px sans-serif; float:left;">hi! i'm <a href="//veryunited.net">martin</a>.<br>
     it was pretty hard to fit this in <a href="//1kb.club">1kb</a>.<br>
-    [<a href="//veryunited.net">more about me</a>]
     <script>
         function d() {
             var ctx = document.querySelector("canvas").getContext?.("2d")
@@ -20,8 +17,8 @@
                 var minute = now.getMinutes();
 
                 // Convert time to angles in radians
-                var hourAngle = ((hour % 12) / 12 * 360 + (minute / 60) * 30) * (Math.PI / 180) - Math.PI / 2;
-                var minuteAngle = (minute / 60) * 360 * (Math.PI / 180) - Math.PI / 2;
+                var hourAngle = ((hour % 12) * 30 + (minute / 2)) * (Math.PI / 180) - Math.PI / 2;
+                var minuteAngle = minute * 6 * Math.PI / 180 - Math.PI / 2;
 
                 for (var hand of [[40, hourAngle], [60, minuteAngle]]) {
                     ctx.beginPath();
@@ -33,3 +30,4 @@
         }
         setInterval(d, 9); // Update the watch every second
     </script>
+    <title>very·united
