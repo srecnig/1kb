@@ -1,26 +1,33 @@
 <!DOCTYPE html>
 <link rel="icon" href="data:,">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<style>
-    @keyframes p {
+<canvas width="150"></canvas>
+<p style="font: 32px serif; float:left;">hi! i'm <a href="//veryunited.net">martin</a>.<br>
+    it is hard to fit this in <a href="1kb">1kb</a>.
+    <script>
+        function d() {
+            var ctx = document.querySelector("canvas").getContext?.("2d")
+            if (ctx) {
+                var now = new Date();
 
-        0%,
-        100% {
-            color: green;
+                // Clear the canvas
+                ctx.clearRect(0, 0, 150, 150);
+
+                // Hours
+                var hour = now.getHours();
+                var minute = now.getMinutes();
+
+                // Convert time to angles in radians
+                var hourAngle = ((hour % 12) * 30 + (minute / 2)) * (Math.PI / 180) - Math.PI / 2;
+                var minuteAngle = minute * 6 * Math.PI / 180 - Math.PI / 2;
+
+                for (var hand of [[40, hourAngle], [60, minuteAngle]]) {
+                    ctx.beginPath();
+                    ctx.moveTo(75, 75);
+                    ctx.lineTo(75 + hand[0] * Math.cos(hand[1]), 75 + hand[0] * Math.sin(hand[1]));
+                    ctx.stroke();
+                }
+            }
         }
-
-        50% {
-            color: purple;
-        }
-    }
-
-    p {
-        font-family: "Garamond", "Georgia", serif;
-        font-size: 32px;
-        animation: p 9s infinite;
-    }
-</style>
-<title>very·united</title>
-<p>hi! i'm martin.<br>
-    it was pretty hard to fit this in <a href="https://1kb.club">1kb</a> - mostly because of CDN headers!<br>
-    [<a href="https://veryunited.net">more about me</a>]
+        setInterval(d, 9); // Update the watch every second
+    </script>
+    <title>very·united

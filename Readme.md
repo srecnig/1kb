@@ -1,6 +1,6 @@
 ## 1kb
 
-just a small website, so i can join the [1k club](https://1kb.club/)
+just a [small website](https://hi.veryunited.net), so i can join the [1k club](https://1kb.club/).
 
 ### build
 
