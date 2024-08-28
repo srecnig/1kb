@@ -8,17 +8,30 @@ SRC_DIR = "src"
 BUILD_DIR = "build"
 
 print("Building...")
-for filename in os.listdir(SRC_DIR):
-    with open(os.path.join(SRC_DIR, filename)) as f:
+
+for root, dirs, files in os.walk(SRC_DIR):
+    for filename in files:
         if not filename.endswith(".html"):
             continue
-        minified = minify_html.minify(
-            f.read(),
-            minify_js=True,
-            minify_css=True,
-            remove_processing_instructions=True,
-        )
-    with open(os.path.join(BUILD_DIR, filename), "w") as f:
-        f.write(minified)
+
+        src_path = os.path.join(root, filename)
+        with open(src_path) as f:
+            minified = minify_html.minify(
+                f.read(),
+                minify_js=True,
+                minify_css=True,
+                remove_processing_instructions=True,
+            )
+
+        relative_path = os.path.relpath(root, SRC_DIR)
+        if relative_path == ".":
+            relative_path = ""
+        build_path = os.path.join(BUILD_DIR, relative_path)
+
+        os.makedirs(build_path, exist_ok=True)
+        new_path = os.path.join(build_path, filename)
+        with open(new_path, "w") as f:
+            f.write(minified)
+        print(f"Built: {new_path}")
 
 print("Done!")
