@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>very·united</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="language" content="english">
+    <meta name="author" content="martin sereinig">
+    <meta name="description" content="about joining the 1kb clubt">
+    <link rel="icon" href="https://veryunited.net/assets/img/favicon.png" />
+</head>
+
+<body>
+    <h1>joining the club</h1>
+    <p>
+        i was recently made aware of the <a href="https://1kb.club">1kb</a> and thought it would be fun to join the
+        club. the gist is: »1kB Club is a list of web pages weighing less than 1 kilobyte (1,024 bytes)«. let's not get
+        into the whole kibibyte vs. kilobyte business – the website says 1024 bytes it is, so 1024 bytes it is.
+    </p>
+    <h1>1kb, that's like – small – right?</h1>
+    <h2>headers, headers everywhere</h2>
+    <p>i don't like to run my own servers. my 1kb page, as well as my <a href="https://veryunited.net">personal
+            website</a> is powered by cloudfront + s3. all this is impleted with CDK setup of multiple stacks &
+        constructs. one could even argue that i overengineer my infrastructure for the privilege of not having to run
+        any real servers. 🤷‍♀️ </p>
+    <p>i wasn't the first one to <a href="https://emi.industries/2024/07-17-1kb-club/">make this experience</a>, but
+        most hosting providers, a <s>metric shit ton</s> whole lot of headers, and thus bytes, are included in the
+        response. in my case, an unconfigured cloudfront distribution with an s3 origin, was returing about ~800 bytes
+        of
+        headers – practically 80% of my budget. it's a relatively new feature, but cloudfront allows you to <a
+            href="https://aws.amazon.com/about-aws/whats-new/2023/01/amazon-cloudfront-supports-removal-response-headers/">remove</a>
+        headers before returning the response. of course, there's a whole list of headers you <a
+            href="https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/understanding-response-headers-policies.html#understanding-response-headers-policies-remove-headers">cannot
+            remove</a>, but there's still quite a bunch of headers you can get rid of. i ended up removing the following
+        headers:
+    <ul>
+        <li>age</li>
+        <li>accept-ranges</li>
+        <li>cache-control</li>
+        <li>etag</li>
+        <li>last-modified</li>
+        <li>vary</li>
+        <li>x-amz-server-side-encryption</li>
+        <li>x-amz-version-id</li>
+    </ul>
+    and had to keep these headers:
+    <ul>
+        <li>content-type</li>
+        <li>content-length</li>
+        <li>date</li>
+        <li>server</li>
+        <li>via</li>
+        <li>x-cache</li>
+        <li>x-amz-cf-pop</li>
+        <li>x-amz-cf-id</li>
+    </ul>
+    this made me end up with the minimum amount of headers you can get out of cloudfront, which is around 350 bytes,
+    depending on various header values. not bad! that leaves me 674 characters to work with!
+    </p>
+    <p>
+    </p>
+    <h2>other dirty tricks and where to find them</h2>
+    <p></p>
+    <h1>conclusion</h1>
+    <p></p>
+</body>
+
+</html>
