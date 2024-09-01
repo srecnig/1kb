@@ -21,6 +21,7 @@ for root, dirs, files in os.walk(SRC_DIR):
                 minify_js=True,
                 minify_css=True,
                 remove_processing_instructions=True,
+                do_not_minify_doctype=True,
             )
 
         relative_path = os.path.relpath(root, SRC_DIR)
