@@ -32,6 +32,6 @@ for root, dirs, files in os.walk(SRC_DIR):
         new_path = os.path.join(build_path, filename)
         with open(new_path, "w") as f:
             f.write(minified)
-        print(f"Built: {new_path}")
+        print(f"Built: {new_path} length: {len(minified.encode("utf-8"))} bytes")
 
 print("Done!")
