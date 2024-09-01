@@ -1,33 +1,40 @@
 <!DOCTYPE html>
 <link rel="icon" href="data:,">
-<canvas width="150"></canvas>
-<p style="font: 32px sans-serif; float:left;">hi! i'm <a href="//veryunited.net">martin</a>.<br>
-    it is hard to fit this in <a href="1kb">1kb</a>.
-    <script>
-        function d() {
-            var ctx = document.querySelector("canvas").getContext?.("2d")
-            if (ctx) {
-                var now = new Date();
+<title>very·united</title>
+<canvas width="150"></canvas><br>
+<a href="1kb.html">[about]</a>
+<script>
+    function d() {
+        var ctx = document.querySelector("canvas").getContext?.("2d")
+        if (ctx) {
+            var now = new Date();
 
-                // Clear the canvas
-                ctx.clearRect(0, 0, 150, 150);
+            // Clear the canvas
+            ctx.clearRect(0, 0, 150, 150);
+            ctx.beginPath();
+            ctx.arc(75, 75, 65, 0, Math.PI * 2);
+            ctx.strokeStyle = '#000';
+            ctx.stroke();
 
-                // Hours
-                var hour = now.getHours();
-                var minute = now.getMinutes();
+            // Hours
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
 
-                // Convert time to angles in radians
-                var hourAngle = ((hour % 12) * 30 + (minute / 2)) * (Math.PI / 180) - Math.PI / 2;
-                var minuteAngle = minute * 6 * Math.PI / 180 - Math.PI / 2;
+            // Convert time to angles in radians
+            var hourAngle = ((hour % 12) * 30 + (minute / 2));
+            var minuteAngle = minute * 6;
+            var secondAngle = second * 6;
 
-                for (var hand of [[40, hourAngle], [60, minuteAngle]]) {
-                    ctx.beginPath();
-                    ctx.moveTo(75, 75);
-                    ctx.lineTo(75 + hand[0] * Math.cos(hand[1]), 75 + hand[0] * Math.sin(hand[1]));
-                    ctx.stroke();
-                }
+            for (var hand of [[40, hourAngle, '#000'], [60, minuteAngle, '#000'], [60, secondAngle, 'red']]) {
+                var angle = hand[1] * (Math.PI / 180) - Math.PI / 2;
+                ctx.beginPath();
+                ctx.moveTo(75, 75);
+                ctx.lineTo(75 + hand[0] * Math.cos(angle), 75 + hand[0] * Math.sin(angle));
+                ctx.strokeStyle = hand[2];
+                ctx.stroke();
             }
         }
-        setInterval(d, 9); // Update the watch every second
-    </script>
-    <title>very·united
+    }
+    setInterval(d, 9);
+</script>
